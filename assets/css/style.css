@@ -1,0 +1,136 @@
+html, body {
+    background-image: url(images/Matrix.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body { 
+    float: left;
+    font-family: sans-serif;
+}
+
+section {
+    margin-top: 115px;
+    float: center;
+    background-color: green;
+    width: 960px;
+    height: 450px;
+    margin-left: 380px;
+    border: 3px solid black;
+    border-radius: 15px;
+    opacity:80%;
+}
+.container\mt-5\mb-5 {
+    float: center;
+    background-color: lightgray;
+}
+
+#score {
+    font-size: 16pt;
+    color: white;
+    float: left;
+}
+
+/* Navbar */
+.custom-border {
+    border-bottom: 3px solid green;
+}
+
+/* .navbar-brand {
+    font-size: 20pt;
+} */
+#intro {
+    text-align: center;
+    font-size: 15pt;
+    color: white;
+}
+
+h4 {
+    font-size: 25pt;
+    margin-top: 5px;
+    margin-left: 80px;
+    text-align: center;
+}
+
+h6 {
+    color: rgb(7, 87, 4);
+    /* font-weight: 100; */
+    font-size: 20pt;
+    text-align: center;
+    background-color: rgb(7, 161, 46);
+}
+
+div {
+    margin-right: 110px;
+    padding: 5px;
+}
+
+/* Timer */
+#start {
+    float: center;
+    margin-left: 305px;;
+}
+
+#restart {
+    margin-top: 5px;
+    margin-left: 281px;
+}
+
+#clockdiv { 
+    font-family: sans-serif; 
+    color: #ffffff;
+    width: 105px;
+    /* display: inline-block;  */
+    font-weight: 80; 
+    text-align: center; 
+    font-size: 25pt;
+    float: right;
+    /* position: relative; */
+    border: 2px solid black;
+}
+
+#clockdiv > div { 
+    /* padding: 10px;  */
+    border-radius: 3px; 
+    background:  rgb(7, 161, 46); 
+    display: inline-block;
+}
+
+#clockdiv div > span { 
+    padding: 15px; 
+    border-radius: 3px; 
+    background: rgb(7, 87, 4); 
+    display: inline-block; 
+} 
+.smalltext {
+    font-size: 16pt;
+    text-align: center;
+}
+
+/* Answer choices */
+#answer1 {
+    
+}
+
+#answer2 {
+    clear: center;
+}
+
+#answer3 {
+
+}
+
+#answer4 {
+
+}
+
+/* Footer */
+.custom-background {
+    background-color: green;
+    padding: 5px;
+}
+
+.custom-footerborder {
+    border-top: 3px solid green;
+}
