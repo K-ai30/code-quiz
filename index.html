@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Code Quiz</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Google APIs -->
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-     <!-- External CSS -->
-     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
      
      <style> 
         p { 
@@ -41,34 +41,34 @@
             <div> 
                 <h6 class="text-white">Timer:</h6>
                 <!-- <p id="Time:"></p> -->
-                <span class="seconds" id="seconds-left">15</span> 
+                <span class="seconds" id="seconds-left"></span> 
                 <h6 class="smalltext text-white">Seconds</h6> 
             </div>
         </div>
 
-        <p id="intro" class="hide">Test your coding knowledge.  Answer the questions quickly, but be careful.  Wrong answers will result in less time on the clock.
-            Good Luck!
-        </p>
-        <div class="row" class="hide">
-            <button id="start" class="btn btn-dark justify-content-center" type="submit">Start the Quiz!</button>
+        <div class="main">
+            <div class="default">
+                <p id="intro">Test your coding knowledge.  Answer the questions quickly, but be careful.  Wrong answers will result in less time on the clock.
+                    Good Luck!
+                </p>
+                <div class="row">
+                    <button id="start" class="btn btn-dark justify-content-center" type="submit">Start the Quiz!</button>
+                </div>
+            </div>
+            <div id="questions"></div>
+            <div class="hide" class="btn btn-dark" id="buttonContainer">
+                
+            </div>
         </div>
 
         <div class="highscore">
             <form id="highscore-form">
               <!-- <label for="highscore-text">Add a Todo:</label> -->
-              <input type="text" placeholder="Your Name" id="highscore-text"/>
+              <input type="text" placeholder="Your Name" class="hide" id="highscore-text"/>
             </form>
             <ol id="highscoreList"></ol>
           </div>
     
-
-        <div class="hide" id="buttonContainer">
-            <button id="answer1" class="btn btn-dark justify-content-center" type="submit"></button>
-            <button id="answer2" class="btn btn-dark justify-content-center" type="submit"></button>
-            <button id="answer3" class="btn btn-dark justify-content-center" type="submit"></button>
-            <button id="answer4" class="btn btn-dark justify-content-center" type="submit"></button>
-        </div>
-
         <div class="hide" id="restartButton">
             <button id="restart" class="btn btn-dark justify-content-center" type="submit">Restart the Quiz!</button>
         </div>
@@ -81,9 +81,10 @@
         <p class="navbar-brand text-white custom-background">Alia Kyle Perry 2020 &copy;</p>
     </footer>  
 
-<!-- JavaScript Code -->
-<script src="logic.js"></script>
-<script src="questions.js"></script>
+    <!-- JavaScript Code -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="./assets/javascript/logic.js"></script>
+<script src="./assets/javascript/questions.js"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 </body>
 </html>
