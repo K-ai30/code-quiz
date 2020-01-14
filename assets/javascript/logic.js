@@ -1,44 +1,4 @@
-// This file needs to have a countdown timer for a timed quiz which will start on the onclick event listener:
-var startButton = document.querySelector("#start")
-var buttonContainer = document.querySelector("#buttonContainer")
-var answer1 = document.querySelector("#answer1")
-var answer2 = document.querySelector("#answer2")
-var answer3 = document.querySelector("#answer3")
-var answer4 = document.querySelector("#answer4")
-var restart = document.querySelector("#restartButton")
-var highscoreList = document.querySelector("#highscoreList")
-var 
-var secondsLeft = (questions.length) * 15;
-
-$(document).ready(function(){
-// Start Button - bootstrap button
-$("#start").on('click', function(){
-    startButton.setAttribute("style", "display: none")
-    buttonContainer.classList.remove(".hide")
-    questionText.classList.remove(".hide")
-    loadquestions();
-    setTime();  
-    printScore.innerText = "Score: " + score
-});
-
-// Set the time we're counting down to
-function setTimer() {
-    $("#seconds-left").text(secondsLeft);
-    let countdown = setInterval(function(){
-    secondsLeft--;
-    $("#seconds-left").text(secondsLeft);
-    if (secondsLeft <=0) {
-    clearInterval(countdown);
-        }
-    }, 1000);
-    }
-
-// Need a for loop for the questions
-for (var i = 0; i < questions.length; i++) {
-    
-}
-   
-// The list of questions that I need to pull into my application
+// The list of questions that I need to pull into my application in the form of an array
 var questions = [
     {
     title: "Commonly used data types DO NOT include:",
@@ -67,84 +27,103 @@ var questions = [
     },
 ];
 
-
-    
-// Need a Timer
-    // timer code and remove ten seconds for wrong answers
-
-
-// Need score and input initials that go into the array of high scores
-//  to do list activities
-
-var todoInput = document.querySelector("#todo-text");
-var todoForm = document.querySelector("#todo-form");
-var todoList = document.querySelector("#todo-list");
-var todoCountSpan = document.querySelector("#todo-count");
-
-var todos = ["Learn HTML", "Learn CSS", "Learn JavaScript", "Learn Local Storage"];
-
-renderTodos();
-
-function renderTodos() {
-  // Clear todoList element and update todoCountSpan
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = todos.length;
-
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
-
-    var li = document.createElement("li");
-    li.textContent = todo;
-    todoList.append(li);
+$(document).ready(function(){
+//  Identify the variables needed to target
+var askedQuestions = [ ];
+// This variable grabs my start button so that I can tell JS to do something with it later
+var startButton = document.querySelector("#start");
+// This variable tells the JS that my timer should start at 75 seconds
+var secondsLeft = 75;
+// var restart = document.querySelector("#restartButton")
+// var highscoreList = document.querySelector("#highscoreList");
 
 
+// Start Button on-click event listeners to start timer and load first question
+$("#start").on('click', function(){
+    // This code runs my timer function
+    setTimer();
+    // This code loads my questions
+    loadQuestion();
+});
 
+// This code is my function to activate my buttons and trigger clicking functionality
+function activateButtons () {
+    console.log("activating buttons");
+    // This code populates my questions and answers in the "button container" and "main" div
+    $("#buttonContainer button").on("click", function(){
+        var btnQuestion = $(this).attr("id").substring(8);
+        var answer = $(this).text();
+        var question = questions[parseInt(btnQuestion)];
+        // This code tracks if the user answered the question correctly and loads next question
+        if (answer == question.answer) {
+           loadQuestion();
+        // This code says if they answered incorrectly decrease the timer and seconds left
+        } else {
+          secondsLeft -= 15;
+        }
+    })
+}
 
+// This code is my function to load the questions and trigger JavaScript effects
+function loadQuestion() {
+    //  Identify the variables needed to target
+    var questionNumber = askedQuestions.length;
+    var questionText = document.querySelector("#questions");
+    var defaultText = document.querySelector(".default");
+    var currentQuestion = questions[questionNumber] ;
+    // This code tracks which questions have been asked and clears previous content
+    askedQuestions.push(currentQuestion);
+    defaultText.setAttribute("style", "display: none");
+    questionText.innerHTML = currentQuestion.title;
+    var buttonContainer = document.querySelector("#buttonContainer");
+    buttonContainer.innerHTML = "";
 
-// var add_minutes =  function (dt) {
-//     return new Date(dt + 60000);
-// }
-// console.log(add_minutes(new Date().getTime()));
-
-// // Update the countdown every 1 second
-// var x = setInterval(function() {
-
-//     // Get the new time
-//     var now = new Date().getTime();
-
-//     // Get the distance between now and the countdown time
-//     // var distance = countDown - now;
-
-//     // Time calculations for minutes and seconds
-//     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-//     document.querySelector("minute").innerHTML = minutes;
-//     document.querySelector("second").innerHTML = seconds;
-
-//     // Display the result in the element with id="Time:"
-//     document.querySelector ("#Time:").innerHTML = minutes + "m " + seconds + "s ";
-
-//     // IF the countdown is finished, write some text to indicate time's up
-//     if (distance < 0) {
-//         clearInterval (x);
-//         document.querySelector("#Time:").innerHTML = "Time's Up";
-//         document.querySelector("minute").innerHTML = '0';
-//         document.querySelector("second").innerHTML = '0'; }
-//     })
-// 1000;
-
-// Application needs to store highscores in the localStorage
-var score = 0;
-var highscore = 0;
-localStorage.setItem("highscore",0);
-
-if(highscore !== null){
-    if (score > highscore) {
-        localStorage.setItem("highscore", score);      
+    // This code refers to the for loop needed for the questions
+    for (let i=0; i < currentQuestion.choices.length; i++) {
+        // Creates my button choices for each of the answers and appends them to the button container
+        var btn = document.createElement("button");
+        btn.innerText = currentQuestion.choices[i];
+        btn.setAttribute("type", "submit");
+        btn.setAttribute("id",`question${questionNumber}`);
+        buttonContainer.append(btn);
     }
-}
-else{
-    localStorage.setItem("highscore", score);
+
+    buttonContainer.classList.remove("hide")
+    activateButtons();
 }
 
+// This code sets the time for the countdown for a timed quiz which will start on the click:
+function setTimer() {
+    $("#seconds-left").text(secondsLeft);
+    let countdown = setInterval(function(){
+        secondsLeft--;
+        $("#seconds-left").text(secondsLeft);
+        if (secondsLeft <=0) {
+            clearInterval(countdown);
+        }
+    }, 1000);
+    }
+
+// startButton.setAttribute("style", "display: none")
+// printScore.innerText = "Score: " + score
+//         Timer = setInterval(renderCounter,1000);  //100ms == 1sec
+//     }
+
+//     function renderCounter(){
+//         if (count<=questionTime){
+//             counter.textContent = "Timer:"+count;
+//             count++;
+//             localStorage.setItem("counter",count);
+
+//             userScore.textContent = "Score: "+score;
+//             localStorage.setItem("score",score);
+//         }
+//         else{
+//             count - 0;
+//             clearInterval(Timer);
+//             scoreRender();
+//         }
+//     }
+
+
+});
