@@ -104,6 +104,20 @@ function setTimer() {
     }, 1000);
     }
 
+
+// New Code
+// var scoreOne = 5;  // Round 1 score
+// var scoreTwo = 5;  // Round 2 score
+// var highscoreOne = 5;  // Round 1 high score
+// var highscoreTwo = 10;  // Round 2 high score
+// var comparison = scoreOne > highscoreOne
+// var comparison = scoreTwo > highscoreTwo
+// var el = document.getElementById()
+// el.innerHTML = 'New high score: ' + comparison;
+
+
+
+
 // startButton.setAttribute("style", "display: none")
 // printScore.innerText = "Score: " + score
 //         Timer = setInterval(renderCounter,1000);  //100ms == 1sec
