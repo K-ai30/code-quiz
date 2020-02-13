@@ -28,7 +28,7 @@ The user can choose one of four possible responses to each question with the fol
 - Timer Penalty
 - Restart Quiz
 
-Additional features include the option saving the high score list to local storage for later retrieval.
+Additional features include the option of saving the high score list to local storage for later retrieval.
 
 ### Notes
 I started building this application for an end-user in an effort to provide a way to assess knowledge of coding concepts. To that end, I hope to achieve some future dated development ideas that will enhance the user engagement with the application.
@@ -41,4 +41,4 @@ The original contributor to this project is the following full stack developer:
 
 As such, for major changes, please open an issue first to discuss what you would like to change. Changes will not be made without the consent of the author of this application.
 
-Copyright (c) [2019] [Alia Kyle Perry]
+Copyright (c) [2020] [Alia Kyle Perry]
