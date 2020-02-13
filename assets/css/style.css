@@ -85,8 +85,10 @@ div {
 }
 
 #restart {
-    margin-top: 5px;
-    margin-left: 281px;
+    float: center;
+    /* margin-top: 5px; */
+    margin-left: 375px;
+    margin-bottom: 200px;
 }
 
 #clockdiv { 

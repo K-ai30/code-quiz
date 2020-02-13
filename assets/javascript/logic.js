@@ -26,6 +26,8 @@ var questions = [
     answer: "All of the Above"
     },
 ];
+var userScore = 0;
+let countdown;
 
 $(document).ready(function(){
 //  Identify the variables needed to target
@@ -34,12 +36,18 @@ var askedQuestions = [ ];
 var startButton = document.querySelector("#start");
 // This variable tells the JS that my timer should start at 75 seconds
 var secondsLeft = 75;
-// var restart = document.querySelector("#restartButton")
 // var highscoreList = document.querySelector("#highscoreList");
-
+var scoreElement = document.querySelector("#score");
 
 // Start Button on-click event listeners to start timer and load first question
 $("#start").on('click', function(){
+    // This code runs my timer function
+    setTimer();
+    // This code loads my questions
+    loadQuestion();
+});
+
+$("#restartButton").on('click', function() {
     // This code runs my timer function
     setTimer();
     // This code loads my questions
@@ -56,50 +64,93 @@ function activateButtons () {
         var question = questions[parseInt(btnQuestion)];
         // This code tracks if the user answered the question correctly and loads next question
         if (answer == question.answer) {
+            userScore++;
            loadQuestion();
         // This code says if they answered incorrectly decrease the timer and seconds left
         } else {
           secondsLeft -= 15;
+          userScore--;
         }
     })
 }
 
+function resetGame() {
+    userScore = 0;
+    clearInterval(countdown);
+    askedQuestions = [ ];
+    secondsLeft = 75;
+}
+
+function startGameOver() {
+    $('.default').css('display', 'block');
+    $('#start').css('display', 'none');
+    $('#restartButton').css('display', 'block');
+
+    $('#buttonContainer').empty();
+    $('#questions').empty();
+}
+
 // This code is my function to load the questions and trigger JavaScript effects
 function loadQuestion() {
-    //  Identify the variables needed to target
-    var questionNumber = askedQuestions.length;
-    var questionText = document.querySelector("#questions");
-    var defaultText = document.querySelector(".default");
-    var currentQuestion = questions[questionNumber] ;
-    // This code tracks which questions have been asked and clears previous content
-    askedQuestions.push(currentQuestion);
-    defaultText.setAttribute("style", "display: none");
-    questionText.innerHTML = currentQuestion.title;
-    var buttonContainer = document.querySelector("#buttonContainer");
-    buttonContainer.innerHTML = "";
 
-    // This code refers to the for loop needed for the questions
-    for (let i=0; i < currentQuestion.choices.length; i++) {
-        // Creates my button choices for each of the answers and appends them to the button container
-        var btn = document.createElement("button");
-        btn.innerText = currentQuestion.choices[i];
-        btn.setAttribute("type", "submit");
-        btn.setAttribute("id",`question${questionNumber}`);
-        buttonContainer.append(btn);
+    if (questions.length === askedQuestions.length) {
+        console.log("Questions done!")
+        clearInterval(countdown);  
+        $('#score').text('Score: ' + userScore);
+        resetGame();
+        startGameOver();
+        // Stop the program
+    } else {
+        //  Get the next question
+        //  Identify the variables needed to target
+        var questionNumber = askedQuestions.length;
+        var questionText = document.querySelector("#questions");
+        var defaultText = document.querySelector(".default");
+        var restartButton = document.querySelector("#restartButton");
+
+        var currentQuestion = questions[questionNumber] ;
+        // This code tracks which questions have been asked and clears previous content
+        askedQuestions.push(currentQuestion);
+        defaultText.setAttribute("style", "display: none");
+        restartButton.setAttribute("style", "display: none");
+        questionText.innerHTML = currentQuestion.title;
+        var buttonContainer = document.querySelector("#buttonContainer");
+        buttonContainer.innerHTML = "";
+    
+        // This code refers to the for loop needed for the questions
+        for (let i=0; i < currentQuestion.choices.length; i++) {
+            // Creates my button choices for each of the answers and appends them to the button container
+            var btn = document.createElement("button");
+            btn.innerText = currentQuestion.choices[i];
+            btn.setAttribute("type", "submit");
+            btn.setAttribute("id",`question${questionNumber}`);
+            buttonContainer.append(btn);
+        }
+    
+        buttonContainer.classList.remove("hide")
+        activateButtons();
     }
-
-    buttonContainer.classList.remove("hide")
-    activateButtons();
 }
 
 // This code sets the time for the countdown for a timed quiz which will start on the click:
 function setTimer() {
     $("#seconds-left").text(secondsLeft);
-    let countdown = setInterval(function(){
+    $("#score").text('Score: ');
+    countdown = setInterval(function(){
         secondsLeft--;
         $("#seconds-left").text(secondsLeft);
-        if (secondsLeft <=0) {
-            clearInterval(countdown);
+
+        // Timer reaches zero
+        if (secondsLeft <=0) {    
+            clearInterval(countdown);  // Stop Timer
+            $("#seconds-left").text(0);  // Display zero when timer is <= to zero
+            if (userScore <= 0) {
+                $("#score").text('Score: ' + 0); 
+            }  else {
+                $("#score").text('Score: ' + userScore);
+            }
+            resetGame();
+            startGameOver();
         }
     }, 1000);
     }
@@ -118,10 +169,8 @@ function setTimer() {
 
 
 
-// startButton.setAttribute("style", "display: none")
-// printScore.innerText = "Score: " + score
-//         Timer = setInterval(renderCounter,1000);  //100ms == 1sec
-//     }
+
+
 
 //     function renderCounter(){
 //         if (count<=questionTime){
